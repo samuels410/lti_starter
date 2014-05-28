@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140527062342) do
+ActiveRecord::Schema.define(:version => 20140528045822) do
 
   create_table "account_transactions", :force => true do |t|
     t.integer  "subscription_id", :null => false
@@ -24,6 +24,23 @@ ActiveRecord::Schema.define(:version => 20140527062342) do
 
   add_index "account_transactions", ["subscription_id"], :name => "index_account_transactions_on_subscription_id"
 
+  create_table "domains", :force => true do |t|
+    t.string   "host"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "external_configs", :force => true do |t|
+    t.string   "config_type"
+    t.string   "app_name"
+    t.integer  "organization_id"
+    t.text     "value"
+    t.text     "shared_secret"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "feature_sets", :force => true do |t|
     t.integer "account_id",  :null => false
     t.integer "no_students"
@@ -31,6 +48,17 @@ ActiveRecord::Schema.define(:version => 20140527062342) do
     t.integer "no_admins"
     t.integer "no_courses"
     t.integer "storage"
+  end
+
+  create_table "organizations", :force => true do |t|
+    t.string   "host"
+    t.string   "name"
+    t.text     "url"
+    t.string   "description"
+    t.string   "image"
+    t.string   "email"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -80,6 +108,17 @@ ActiveRecord::Schema.define(:version => 20140527062342) do
   add_index "subscriptions", ["paid_through"], :name => "index_subscriptions_on_paid_through"
   add_index "subscriptions", ["subscribable_id"], :name => "index_subscriptions_on_subscribable_id"
   add_index "subscriptions", ["subscribable_type"], :name => "index_subscriptions_on_subscribable_type"
+
+  create_table "user_configs", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "access_token"
+    t.integer  "domain_id"
+    t.string   "name"
+    t.text     "image"
+    t.string   "global_user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => "unknown"

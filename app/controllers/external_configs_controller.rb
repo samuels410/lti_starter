@@ -1,0 +1,2 @@
+class ExternalConfigsController < ApplicationController
+end

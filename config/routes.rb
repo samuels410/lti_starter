@@ -1,5 +1,20 @@
 Subscription::Application.routes.draw do
 
+  resources :user_configs
+
+
+  resources :external_configs
+
+
+  resources :organizations
+
+
+  resources :domains
+
+
+  resources :feature_sets
+
+
   devise_for :users
 
   get "home/index"

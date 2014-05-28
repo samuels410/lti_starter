@@ -41,3 +41,5 @@ gem 'freemium' ,git: "git://github.com/kalabiyau/freemium"
 gem 'devise'
 gem "rolify"
 gem "cancan"
+gem "ims-lti"
+gem "canvas-api"
