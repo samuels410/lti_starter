@@ -31,5 +31,7 @@ Subscription::Application.routes.draw do
   get "query/show"
   get "refund/show"
   post "refund/index"
+  post "/placement_launch",to: "application#placement_launch"
+
 
 end
