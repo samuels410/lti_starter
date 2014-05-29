@@ -1,0 +1,25 @@
+<%= render :partial => 'form' %>
+<table class="table">
+  <tr>
+    <th>Serial no</th>
+    <th>Config Type</th>
+    <th>App Name</th>
+    <th>Value</th>
+    <th>Shared Secret</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <% @external_configs.each_with_index do |external_config,idx| %>
+      <tr>
+        <td><%= idx +1 %></td>
+        <td><%= external_config.config_type%></td>
+        <td><%= external_config.app_name%></td>
+        <td><%= external_config.value%></td>
+        <td><%= external_config.shared_secret%></td>
+        <td><%= link_to "Edit", edit_external_config_path(external_config) %></td>
+        <td><%= link_to "Destroy", external_config, :confirm => 'Are you sure?', :method => :delete %></td>
+
+      </tr>
+
+  <% end  %>
+</table>

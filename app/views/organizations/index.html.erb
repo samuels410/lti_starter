@@ -1,0 +1,26 @@
+<%= render :partial => 'form' %>
+<table class="table">
+  <tr>
+    <th>Serial no</th>
+    <th>Host</th>
+    <th>Name</th>
+    <th>Url</th>
+    <th>Image Url</th>
+    <th>Email</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <% @organizations.each_with_index do |organization,idx| %>
+      <tr>
+        <td><%= idx +1 %></td>
+        <td><%= organization.name%></td>
+        <td><%= organization.host%></td>
+        <td><%= organization.image%></td>
+        <td><%= organization.email%></td>
+        <td><%= link_to "Edit", edit_organization_path(organization) %></td>
+        <td><%= link_to "Destroy", organization, :confirm => 'Are you sure?', :method => :delete %></td>
+
+      </tr>
+
+  <% end  %>
+</table>

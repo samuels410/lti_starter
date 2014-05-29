@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140528045822) do
+ActiveRecord::Schema.define(:version => 20140529085212) do
 
   create_table "account_transactions", :force => true do |t|
     t.integer  "subscription_id", :null => false
@@ -42,12 +42,14 @@ ActiveRecord::Schema.define(:version => 20140528045822) do
   end
 
   create_table "feature_sets", :force => true do |t|
-    t.integer "account_id",  :null => false
+    t.integer "organization_id", :null => false
     t.integer "no_students"
     t.integer "no_teachers"
     t.integer "no_admins"
     t.integer "no_courses"
     t.integer "storage"
+    t.string  "name"
+    t.integer "price"
   end
 
   create_table "organizations", :force => true do |t|

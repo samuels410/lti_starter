@@ -153,6 +153,7 @@ DEPENDENCIES
   freemium!
   ims-lti
   jquery-rails
+  oauth
   rails (= 3.2.18)
   rolify
   sass-rails (~> 3.2.3)

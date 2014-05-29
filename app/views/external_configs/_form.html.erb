@@ -1,0 +1,32 @@
+<%= form_for @external_config do |f| %>
+    <ul>
+      <% @external_config.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <%= f.select :config_type, options_for_select([["Select One", ""], "canvas_oauth", "lti"] ,
+                                                  :selected => @external_config.config_type)%>
+    <%= f.label :app_name %>
+    <%= f.text_field :app_name, :placeholder => "App Name"%>
+    <div id="canvas_oauth">
+    <%= f.label :value %>
+    <%= f.text_field :value , :placeholder => "Canvas Oauth Id(Developer Key ID)"%>
+    <%= f.label :shared_secret%>
+    <%= f.text_field :shared_secret, :placeholder => "Developer Key"%>
+    </div>
+    <br/>
+ <%= f.submit "Submit" ,:class => "btn btn-primary"%>
+ </ul>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+    $( "#external_config_config_type" ).change(function(event) {
+        if ($( "#external_config_config_type option:selected" ).val() == "lti"){
+           $("#canvas_oauth").hide();
+        }else{
+            $("#canvas_oauth").show();
+        }
+    });
+
+
+</script>

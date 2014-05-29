@@ -1,0 +1,21 @@
+<%= render :partial => 'form' %>
+<table class="table">
+  <tr>
+    <th>Serial no</th>
+    <th>Name</th>
+    <th>Host</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <% @domains.each_with_index do |domain,idx| %>
+      <tr>
+        <td><%= idx +1 %></td>
+        <td><%= domain.name%></td>
+        <td><%= domain.host%></td>
+        <td><%= link_to "Edit", edit_domain_path(domain) %></td>
+        <td><%= link_to "Destroy", domain, :confirm => 'Are you sure?', :method => :delete %></td>
+
+      </tr>
+
+  <% end  %>
+</table>

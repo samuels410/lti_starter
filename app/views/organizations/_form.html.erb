@@ -1,0 +1,20 @@
+<%= form_for @organization do |f| %>
+    <ul>
+      <% @organization.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <%= f.label :host %>
+    <%= f.text_field :host , :placeholder => "Without Protocol"%>
+    <%= f.label :name %>
+    <%= f.text_field :name , :placeholder => "Account name"%>
+    <%= f.label :url %>
+    <%= f.text_field :url , :placeholder => "Full url"%>
+    <%= f.label :image %>
+    <%= f.text_field :image , :placeholder => "Image url"%>
+    <%= f.label :email %>
+    <%= f.text_field :email, :placeholder => "Admin Email"%>
+    <br/>
+ <%= f.submit "Submit" ,:class => "btn btn-primary"%>
+ </ul>
+<% end %>

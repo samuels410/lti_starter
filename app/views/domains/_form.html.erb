@@ -1,0 +1,14 @@
+<%= form_for @domain do |f| %>
+    <ul>
+      <% @domain.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <%= f.label :host %>
+    <%= f.text_field :host , :placeholder => "LTI Consumer Host"%>
+    <%= f.label :name %>
+    <%= f.text_field :name , :placeholder => "e.g:Arrivu Hiring LMS"%>
+    <br/>
+ <%= f.submit "Submit" ,:class => "btn btn-primary"%>
+ </ul>
+<% end %>

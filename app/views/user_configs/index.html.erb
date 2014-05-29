@@ -1,0 +1,23 @@
+<table class="table">
+  <tr>
+    <th>Serial no</th>
+    <th>name</th>
+    <th>Access Token</th>
+    <th>image</th>
+    <th>global_user_id</th>
+    <th>user_id</th>
+    <th>domain_id</th>
+  </tr>
+  <% @user_configs.each_with_index do |user_config,idx| %>
+      <tr>
+        <td><%= idx +1 %></td>
+        <td><%= user_config.name%></td>
+        <td><%= user_config.access_token%></td>
+        <td><%= image_tag user_config.image ,:size => '150x50'%></td>
+        <td><%= user_config.global_user_id%></td>
+        <td><%= user_config.user_id%></td>
+        <td><%= user_config.domain_id%></td>
+      </tr>
+
+  <% end  %>
+</table>
