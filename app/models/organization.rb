@@ -4,5 +4,7 @@ class Organization < ActiveRecord::Base
 
   has_many :external_configs
   has_many :feature_sets
+  has_many :subscription_plans
+  has_many :subscriptions
 
 end

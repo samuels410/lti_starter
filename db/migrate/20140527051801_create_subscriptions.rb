@@ -1,6 +1,7 @@
 class CreateSubscriptions < ActiveRecord::Migration
   def self.up
     create_table :subscriptions, :force => true do |t|
+      t.column :organization_id, :integer, :null => false
       t.column :subscribable_id, :integer, :null => false
       t.column :subscribable_type, :string, :null => false
       t.column :billing_key, :string, :null => true

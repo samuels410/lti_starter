@@ -3,7 +3,7 @@ module ApplicationHelper
   def check_admin_user
     unless user_signed_in? and current_user.has_role? :admin
       flash[:error] = "Not Autorized"
-      redirect_t root_url
+      redirect_to root_url
     end
   end
 

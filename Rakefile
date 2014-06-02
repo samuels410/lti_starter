@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Subscription::Application.load_tasks
+LTISubscription::Application.load_tasks

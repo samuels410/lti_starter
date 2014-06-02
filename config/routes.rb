@@ -1,10 +1,15 @@
-Subscription::Application.routes.draw do
+LTISubscription::Application.routes.draw do
 
   resources :user_configs
   resources :external_configs
   resources :organizations
   resources :domains
   resources :feature_sets
+  resources :subscription_plans do
+    get 'pre_index', on: :collection
+    post 'pre_index', on: :collection
+    get 'subscribe', on: :member
+  end
 
   devise_for :users
 
@@ -25,7 +30,7 @@ Subscription::Application.routes.draw do
   post "/placement_launch",to: "lti#placement_launch"
   get "/oauth_success",to: "lti#oauth_success"
   get "/session_fix",to: "lti#session_fixed"
-  get "plans",to: "feature_sets#plans"
+  get "plans",to: "subscription_plans#plans"
 
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140529085212) do
+ActiveRecord::Schema.define(:version => 20140528045822) do
 
   create_table "account_transactions", :force => true do |t|
     t.integer  "subscription_id", :null => false
@@ -42,14 +42,14 @@ ActiveRecord::Schema.define(:version => 20140529085212) do
   end
 
   create_table "feature_sets", :force => true do |t|
-    t.integer "organization_id", :null => false
+    t.integer "organization_id",                    :null => false
+    t.string  "name"
     t.integer "no_students"
     t.integer "no_teachers"
     t.integer "no_admins"
     t.integer "no_courses"
     t.integer "storage"
-    t.string  "name"
-    t.integer "price"
+    t.boolean "unlimited",       :default => false
   end
 
   create_table "organizations", :force => true do |t|
@@ -87,13 +87,15 @@ ActiveRecord::Schema.define(:version => 20140529085212) do
   add_index "subscription_changes", ["subscribable_id", "subscribable_type"], :name => "on_subscribable_id_and_type"
 
   create_table "subscription_plans", :force => true do |t|
-    t.string  "name",           :null => false
-    t.string  "key",            :null => false
-    t.integer "rate_paisa",     :null => false
-    t.string  "feature_set_id", :null => false
+    t.integer "organization_id", :null => false
+    t.string  "name",            :null => false
+    t.string  "redemption_key"
+    t.integer "rate_cents",      :null => false
+    t.string  "feature_set_id",  :null => false
   end
 
   create_table "subscriptions", :force => true do |t|
+    t.integer  "organization_id",                         :null => false
     t.integer  "subscribable_id",                         :null => false
     t.string   "subscribable_type",                       :null => false
     t.string   "billing_key"

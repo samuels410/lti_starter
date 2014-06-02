@@ -1,10 +1,10 @@
 GIT
-  remote: git://github.com/kalabiyau/freemium
-  revision: c02c7bf221459b9b57b023ad2a5110ac7d42703b
+  remote: git://github.com/samuels410/freemium
+  revision: 799e2cb5ef477fd8ee76aea0c377eeee84c7cd95
   specs:
     freemium (0.0.2)
       money
-      rails (~> 3.0)
+      rails (>= 3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -85,6 +85,7 @@ GEM
     multi_json (1.10.1)
     oauth (0.4.7)
     orm_adapter (0.5.0)
+    pg (0.17.1)
     polyglot (0.3.4)
     rack (1.4.5)
     rack-cache (1.2)
@@ -154,6 +155,7 @@ DEPENDENCIES
   ims-lti
   jquery-rails
   oauth
+  pg
   rails (= 3.2.18)
   rolify
   sass-rails (~> 3.2.3)

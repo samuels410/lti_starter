@@ -3,7 +3,7 @@ class LtiController < ApplicationController
   before_filter :validate_lti_launch, except: [:oauth_success]
 
   def placement_launch
-    redirect_to plans_path
+    redirect_to plans_path(organization_id: @org.id)
   end
 
   def session_fixed
@@ -15,14 +15,14 @@ class LtiController < ApplicationController
       render 'session_lost'
     end
     domain = Domain.find(session['domain_id'])
-    protocol = ENV['RACK_ENV'].to_s == "development" ? "https" : "https"
+    protocol = ENV['RACK_ENV'].to_s == "development" ? "http" : "https"
     return_url = "#{protocol}://#{env['HTTP_HOST']}/oauth_success"
     code = params['code']
     url = "#{protocol}://#{domain.host}/login/oauth2/token"
     uri = URI.parse(url)
 
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = protocol == "https"
+    http.use_ssl = protocol if protocol  == "https"
     request = Net::HTTP::Post.new(uri.request_uri)
     request.set_form_data({
                               :client_id => oauth_config.value,

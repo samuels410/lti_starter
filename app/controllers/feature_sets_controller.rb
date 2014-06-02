@@ -1,10 +1,5 @@
 class FeatureSetsController < ApplicationController
   before_filter :check_admin_user
-
-  def plans
-    @plans = FeatureSet.all
-  end
-
   def index
     @feature_set = FeatureSet.new
     @feature_sets = FeatureSet.all

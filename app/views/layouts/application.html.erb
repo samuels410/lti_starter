@@ -8,7 +8,7 @@
 </head>
 <body>
 <%= render 'layouts/header' %>
-<div class="container-fluid">
+<div class="container">
 <% unless response.cache_control[:public] %>
     <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>

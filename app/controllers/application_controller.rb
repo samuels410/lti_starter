@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       session["launch_course_id"] = params['custom_canvas_course_id']
       session["permission_for_#{params['custom_canvas_course_id']}"] = 'view'
       session['email'] = params['lis_person_contact_email_primary']
-
+      session['account_id'] = params['custom_canvas_account_id']
       # TODO: something akin to this parameter needs to be sent in order to
       # tell the difference between Canvas Cloud and Canvas CV instances.
       # Otherwise I can't tell the difference between global_user_id 5 from
@@ -101,7 +101,7 @@ class ApplicationController < ActionController::Base
 
   def api_call(path, user_config, all_pages=false)
     #protocol = 'https'
-    protocol = ENV['RACK_ENV'].to_s == "development" ? "https" : "https"
+    protocol = ENV['RACK_ENV'].to_s == "development" ? "http" : "https"
     host = "#{protocol}://#{user_config.host}"
     canvas = Canvas::API.new(:host => host, :token => user_config.access_token)
     begin

@@ -10,11 +10,11 @@
     http://www.imsglobal.org/xsd/imslticp_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
   <blti:title>subscription</blti:title>
   <blti:description>lti subscription</blti:description>
-  <blti:launch_url>http://localhost:3000/placement_launch</blti:launch_url>
+  <blti:launch_url>http://localhost:3000</blti:launch_url>
   <blti:extensions platform="canvas.instructure.com">
     <lticm:property name="privacy_level">public</lticm:property>
     <lticm:property name="tool_id">subscription</lticm:property>
-    <lticm:options name="user_navigation">
+    <lticm:options name="account_navigation">
       <lticm:property name="url">http://localhost:3000/placement_launch</lticm:property>
       <lticm:property name="text">Subscription</lticm:property>
       <lticm:property name="enabled">true</lticm:property>

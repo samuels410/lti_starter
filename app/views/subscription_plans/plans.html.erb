@@ -1,0 +1,32 @@
+<div id="plans">
+  <% @plans.each do |plan| %>
+      <div class="plan">
+        <div class="name"><%= plan.name %></div>
+        <div class="details">
+          <div class="price">
+            &#8377;<%= "#{plan.rate_cents }"%>
+          </div>
+          <div class="per_month">per month</div>
+          <div class="kisses"><%= plan.feature_set.no_courses%> Courses</div>
+          <hr/>
+          <div class="kisses"><%= plan.feature_set.no_students%> Students</div>
+          <hr/>
+          <div class="kisses"><%= plan.feature_set.no_teachers%> Teachers</div>
+          <hr/>
+          <div class="kisses"><%= plan.feature_set.no_admins%> Admins</div>
+          <hr/>
+          <div class="kisses"><%= plan.feature_set.storage%> Storage</div>
+
+          <div class="signup">
+            <% if @subscription.subscription_plan_id ==  plan.id %>
+                <%= link_to "Current Plan", "#" %>
+             <% else  %>
+            <%= link_to "Subscribe", subscribe_subscription_plan_path(plan,subscription_id: @subscription.id) %>
+            <% end%>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+  <div class="clear"></div>
+</div>

@@ -10,10 +10,11 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'freemium' ,git: "git://github.com/kalabiyau/freemium"
+gem 'freemium' ,git: "git://github.com/samuels410/freemium"
 gem 'devise'
 gem "rolify"
 gem "cancan"
 gem "ims-lti"
 gem "canvas-api"
 gem "oauth"
+gem 'pg'

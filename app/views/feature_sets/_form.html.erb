@@ -14,23 +14,18 @@
  
     <%= f.label :name %>
     <%= f.text_field :name %>
- 
- 
-    <%= f.label :price %>
-    <%= f.text_field :price %>
- 
- 
+
     <%= f.label :no_students %>
     <%= f.text_field :no_students%>
-
+     <%= f.label :no_teachers %>
+     <%= f.text_field :no_teachers%>
    </li>
  
    <li style="float: right;
-           margin-top: -19%;
-           margin-right: 62%;">
-      <%= f.label :no_teachers %>
-      <%= f.text_field :no_teachers%>
-   
+           margin-top: -259px;
+           margin-right: 54%;">
+
+
    
       <%= f.label :no_admins %>
       <%= f.text_field :no_admins%>
@@ -43,8 +38,11 @@
       <%= f.label :storage %>
       <%= f.text_field :storage%>
 
+     <%= f.label :unlimited %>
+     <%= f.check_box :unlimited%>
+
+
    </li>
-   
- <%= f.submit "Submit" ,:class => "btn btn-primary"%>
+      <%= f.submit "Submit" ,:class => "btn btn-primary"%>
  </ul>
 <% end %>
