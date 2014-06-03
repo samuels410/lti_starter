@@ -5,7 +5,7 @@ class Subscription < ActiveRecord::Base
 
   SUBSCRIBABLE_TYPE_ACCOUNT = 'Account'
 
-  # Temporary After Integarte Payment gateway have to remove ,to override default
+  # Temporary After Integrate Payment gateway have to remove ,to override default
   def paid?
 
   end
