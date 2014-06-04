@@ -16,6 +16,9 @@ class SubscriptionPlansController < ApplicationController
     @subscription = Subscription.find(params[:subscription_id])
     @subscription.update_attributes!(subscription_plan_id: @subscription_plan.id)
     flash[:info] = "Your Plan has been changed"
+    if @subscription.valid?
+      update_lms_account(@subscription)
+    end
     redirect_to plans_path
   end
 

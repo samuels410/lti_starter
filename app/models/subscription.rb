@@ -9,4 +9,5 @@ class Subscription < ActiveRecord::Base
   def paid?
 
   end
+
 end

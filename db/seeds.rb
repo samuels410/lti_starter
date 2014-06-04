@@ -14,7 +14,7 @@
                       no_teachers: 2,
                       no_admins: 1,
                       no_courses: 2,
-                      storage: 500,
+                      storage: 1000,
                       unlimited: false)
     @f2= FeatureSet.create(organization_id: @organization.id,
                       name: "Plus",

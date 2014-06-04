@@ -19,4 +19,28 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def api_call(path, user_config, all_pages=false,method=nil,params=nil)
+    #protocol = 'https'
+    protocol = ENV['RACK_ENV'].to_s == "development" ? "http" : "https"
+    host = "#{protocol}://#{user_config.host}"
+    canvas = Canvas::API.new(:host => host, :token => user_config.access_token)
+    begin
+      if method == :post
+        result = canvas.post(path,params)
+      else
+        result = canvas.get(path)
+      end
+
+      if result.is_a?(Array) && all_pages
+        while result.more?
+          result.next_page!
+        end
+      end
+      return result
+    rescue Canvas::ApiError => e
+      return false
+    end
+  end
+
+
 end
