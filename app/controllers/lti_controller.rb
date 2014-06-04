@@ -55,7 +55,7 @@ class LtiController < ApplicationController
       session['name'] = name
       session['email'] = email
 
-      redirect_to root_path
+      redirect_to plans_path
     else
       return error("Error retrieving access token")
     end

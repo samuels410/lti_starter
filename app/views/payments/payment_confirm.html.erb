@@ -1,0 +1,25 @@
+
+ <h3 style="text-align: center;">Order Details</h3>
+<table class="table table-bordered table-striped">
+<thead><th>Plan Name</th><th>Description</th><th>Price</th></thead>
+  <tr class="confirm_box_row">
+    <td><%= @subscription_plan.name%></td>
+    <td>
+      <%= @subscription_plan.feature_set.no_courses%>&nbsp;Courses<br/>
+      <%= @subscription_plan.feature_set.no_students%>&nbsp;Students <br/>
+      <%= @subscription_plan.feature_set.no_teachers%>&nbsp;Teachers <br/>
+      <%= @subscription_plan.feature_set.no_admins%>&nbsp;Admins<br/>
+      <%= @subscription_plan.feature_set.storage%>&nbsp;MB Storage<br/>
+    </td>
+    <td><%= Money.new(@subscription_plan.rate_cents.to_i, "INR") * 60%>&nbsp; &#8377;</td></tr>
+  <tr><td colspan="3" style="text-align: center;">
+  <% @grouped_payments.each do |payments| %>
+        <% payment = payments.first %>
+        <%= content_tag :section, :class => :redirect do %>
+            <div class="boxes">
+              <%= render payments %>
+            </div>
+        <% end %>
+    <% end %></td></tr>
+</table>
+

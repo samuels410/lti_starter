@@ -32,5 +32,14 @@ LTISubscription::Application.routes.draw do
   get "/session_fix",to: "lti#session_fixed"
   get "plans",to: "subscription_plans#plans"
 
+  match 'confirm/:subscription_id',:to => 'payments#payment_confirm', :as => :payment_confirm
+  resources :payments, only: [:show, :create, :destroy] do
+    collection do
+      get :success
+      get :cancel
+      post :notify
+    end
+  end
+
 
 end

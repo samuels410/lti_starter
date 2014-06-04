@@ -16,7 +16,7 @@
       <td><%= subscription_plan.name %></td>
       <td><%= subscription_plan.rate_cents %></td>
 
-      <td><%= link_to "Edit", edit_subscription_plan_path(subscription_plan) %></td>
+      <td><%= link_to "Edit", edit_subscription_plan_path(subscription_plan,organization_id: @org.id) %></td>
       <td><%= link_to "Destroy", subscription_plan, :confirm => 'Are you sure?', :method => :delete %></td>
 
     </tr>

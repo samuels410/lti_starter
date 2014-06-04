@@ -4,7 +4,7 @@
         <div class="name"><%= plan.name %></div>
         <div class="details">
           <div class="price">
-            &#8377;<%= "#{plan.rate_cents }"%>
+            &#8377;<%= "#{Money.new(plan.rate_cents.to_i, "INR") * 60 }"%>
           </div>
           <div class="per_month">per month</div>
           <div class="kisses"><%= plan.feature_set.no_courses%> Courses</div>

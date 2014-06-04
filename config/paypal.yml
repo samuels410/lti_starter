@@ -1,0 +1,14 @@
+development: &sandbox # change to your own
+  username: sukumar.inapp-facilitator_api1.gmail.com
+  password: 1382692493
+  signature: A.EUWmunirmkgt1JSKheVefdBP.fAYrjNzofOyzaOQoImwuyh41n6JOx
+  sandbox: true
+
+test:
+  <<: *sandbox
+
+production: &production
+  username: SET_YOUR_OWN
+  password: SET_YOUR_OWN
+  signature: SET_YOUR_OWN
+  sandbox: false

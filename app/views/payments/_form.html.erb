@@ -1,0 +1,13 @@
+<%= form_for payment do |f| %>
+  <%= f.hidden_field :amount,:value=>  Money.new(@subscription_plan.rate_cents.to_i, "USD") %>
+  <%= f.hidden_field :subscription_plan_id,:value=> @subscription_plan.id %>
+  <%= f.hidden_field :subscription_id,:value=> @subscription.id %>
+   <%= f.hidden_field :user_config_id,:value=> session["user_id"]%>
+  <%= f.hidden_field :digital ,:value=> true%>
+  <%= f.hidden_field :recurring,:value=> false %>
+  <%= f.hidden_field :popup,:value=> true %>
+  <%= f.hidden_field :title,:value=> @subscription_plan.name %>
+  <%= f.hidden_field :description,:value=> @subscription_plan.name %>
+  <%= f.submit 'Confirm', :class=>"btn btn-primary" %>
+   <%= link_to 'Cancel' ,plans_path , :class=>"btn" %>
+<% end %>

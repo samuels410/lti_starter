@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140528045822) do
+ActiveRecord::Schema.define(:version => 20140604071341) do
 
   create_table "account_transactions", :force => true do |t|
     t.integer  "subscription_id", :null => false
@@ -61,6 +61,23 @@ ActiveRecord::Schema.define(:version => 20140528045822) do
     t.string   "email"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "subscription_id"
+    t.integer  "user_config_id"
+    t.integer  "subscription_plan_id"
+    t.integer  "amount",               :default => 1
+    t.string   "token"
+    t.string   "identifier"
+    t.string   "payer_id"
+    t.boolean  "recurring",            :default => false
+    t.boolean  "digital",              :default => false
+    t.boolean  "popup",                :default => false
+    t.boolean  "completed",            :default => false
+    t.boolean  "canceled",             :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "roles", :force => true do |t|
