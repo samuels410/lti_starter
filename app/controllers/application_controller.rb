@@ -52,6 +52,7 @@ class ApplicationController < ActionController::Base
       session['domain_id'] = domain.id.to_s
       session['params_stash'] = hash_slice(params, 'custom_show_all', 'custom_show_course', 'ext_content_intended_use', 'picker', 'custom_canvas_course_id', 'launch_presentation_return_url', 'ext_content_return_url')
       session['custom_show_all'] = params['custom_show_all']
+      session['referrer'] = request.referrer
 
       # if we already have an oauth token then make sure it works
       json = api_call("/api/v1/users/self/profile", user_config) if user_config
@@ -70,7 +71,11 @@ class ApplicationController < ActionController::Base
 
   def get_org
     @org = Organization.find_by_host(request.env['HTTP_HOST'])
-    flash[:error] = "Domain not properly configured. No Organization record matching the host #{request.env['HTTP_HOST']}"  unless @org
+    if @org
+     session['organization_id'] = @org.id
+    else
+      flash[:error] = "Domain not properly configured. No Organization record matching the host #{request.env['HTTP_HOST']}"
+   end
   end
 
   def oauth_dance(request, host)

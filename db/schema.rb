@@ -67,17 +67,19 @@ ActiveRecord::Schema.define(:version => 20140604071341) do
     t.integer  "subscription_id"
     t.integer  "user_config_id"
     t.integer  "subscription_plan_id"
-    t.integer  "amount",               :default => 1
-    t.string   "token"
-    t.string   "identifier"
-    t.string   "payer_id"
-    t.boolean  "recurring",            :default => false
-    t.boolean  "digital",              :default => false
-    t.boolean  "popup",                :default => false
-    t.boolean  "completed",            :default => false
-    t.boolean  "canceled",             :default => false
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.text     "merchant_transaction_id"
+    t.text     "final_redirect_url"
+    t.decimal  "transaction_amount"
+    t.string   "buyer_email_address"
+    t.string   "transaction_type"
+    t.string   "payment_method"
+    t.string   "currency"
+    t.string   "ui_mode"
+    t.string   "hash_method"
+    t.boolean  "completed",               :default => false
+    t.boolean  "canceled",                :default => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "roles", :force => true do |t|

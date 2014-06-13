@@ -1,4 +1,4 @@
-require 'lib/utils.rb'
+require 'lib/pz_utils.rb'
 
 module RefundTransactionResponse
   include PZ_Utils

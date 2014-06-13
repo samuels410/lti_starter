@@ -28,7 +28,7 @@ class ChargingController < ApplicationController
     set_transaction_amount(params[:transaction_amount])
     set_payment_method(params[:payment_method])
     set_emi_months(params[:emi_months])
-    set_bank_name(params[:bank_name])
+    set_bank_name("HDFC")
     set_currency(params[:currency])
     set_min_sla(params[:min_sla])
     set_is_user_logged_in(params[:is_user_logged_in])

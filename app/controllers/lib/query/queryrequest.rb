@@ -1,6 +1,6 @@
 require 'lib/config.rb'
 require 'net/http'
-require 'lib/utils.rb'
+require 'lib/pz_utils.rb'
 require 'lib/constants.rb'
 require 'lib/query/queryresponse.rb'
 

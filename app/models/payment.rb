@@ -1,30 +1,23 @@
 class Payment < ActiveRecord::Base
 
-  attr_accessible :subscription_plan_id,:subscription_id,:user_config_id,:token, :identifier, :payer_id,:recurring, :digital, :popup, :completed, :canceled,
-                  :amount, :title, :description
+  attr_accessible :subscription_plan_id,:subscription_id,:user_config_id,:merchant_transaction_id,
+                  :buyer_email_address,:transaction_type,:transaction_amount,:payment_method,:currency,:ui_mode,
+                  :hash_method,:completed, :canceled,:final_redirect_url
 
-  validates_presence_of :amount
-  validates_uniqueness_of :identifier, uniqueness: true, :allow_blank => true, :allow_nil => true
-  scope :recurring, where(recurring: true)
-  scope :digital,   where(digital: true)
-  scope :popup,     where(popup: true)
+  validates_presence_of :subscription_plan_id,:subscription_id,:user_config_id,
+                          :buyer_email_address,:transaction_type,:transaction_amount,:payment_method,:currency,:ui_mode,
+                          :hash_method,:final_redirect_url
+  validates_uniqueness_of :merchant_transaction_id, uniqueness: true
+
   scope :completed,     where(completed: true)
-  cattr_accessor :title ,:description
+
   belongs_to :subscription
   belongs_to  :user_config
   belongs_to :subscription_plan
 
-  def goods_type
-    digital? ? :digital : :real
-  end
+  before_create :generate_merchant_transaction_id
 
-  def payment_type
-    recurring? ? :recurring : :instant
-  end
 
-  def ux_type
-    popup? ? :popup : :redirect
-  end
 
   def details
     if recurring?
@@ -74,6 +67,16 @@ class Payment < ActiveRecord::Base
     client.renew!(self.identifier, :Cancel)
     self.cancel!
   end
+
+  protected
+
+  def generate_merchant_transaction_id
+    self.merchant_transaction_id = loop do
+      random_token = SecureRandom.urlsafe_base64(nil, false)
+      break random_token unless Payment.exists?(merchant_transaction_id: random_token)
+    end
+  end
+
 
   private
 

@@ -47,7 +47,7 @@
 <%if @request_array["error_message"] == "" %>
 
     <% if @param["ui_mode"] == "IFRAME" %>
-        <br>q
+        <br>
         <iframe id="ifr" src="<%= @request_array["url"] %>"></iframe>
 
     <% elsif  @param["ui_mode"] == "REDIRECT" %>

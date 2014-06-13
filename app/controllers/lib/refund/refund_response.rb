@@ -1,4 +1,4 @@
-require 'lib/utils.rb'
+require 'lib/pz_utils.rb'
 require 'lib/constants.rb'
 require 'lib/refund/refund_transaction_response.rb'
 

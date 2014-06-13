@@ -1,5 +1,5 @@
 require 'lib/constants.rb'
-require 'lib/utils.rb'
+require 'lib/pz_utils.rb'
 module ChargingResponse
   include PZ_Constants
   include PZ_Utils

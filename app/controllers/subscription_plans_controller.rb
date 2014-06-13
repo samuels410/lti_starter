@@ -5,7 +5,6 @@ class SubscriptionPlansController < ApplicationController
 
   def plans
     @org = Organization.find((params[:organization_id] ||= session['organization_id']))
-    session['organization_id'] = @org.id
     @plans = @org.subscription_plans
     get_subscription
   end

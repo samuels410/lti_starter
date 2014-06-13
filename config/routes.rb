@@ -21,7 +21,7 @@ LTISubscription::Application.routes.draw do
   get "response/response_display"
   get "charging/charging_display"
   post "charging/charging_display"
-  get "charging/show"
+  get "charging/show" ,:as => :charging
   post "response/response_display"
   post "query/index"
   get "query/show"
@@ -35,7 +35,7 @@ LTISubscription::Application.routes.draw do
   match 'confirm/:subscription_id',:to => 'payments#payment_confirm', :as => :payment_confirm
   resources :payments, only: [:show, :create, :destroy] do
     collection do
-      get :success
+      post :success
       get :cancel
       post :notify
     end

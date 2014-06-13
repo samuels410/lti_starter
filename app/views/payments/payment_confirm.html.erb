@@ -11,8 +11,8 @@
       <%= @subscription_plan.feature_set.no_admins%>&nbsp;Admins<br/>
       <%= @subscription_plan.feature_set.storage%>&nbsp;MB Storage<br/>
     </td>
-    <td><%= Money.new(@subscription_plan.rate_cents.to_i, "INR") * 60%>&nbsp; &#8377;</td></tr>
-  <tr><td colspan="3" style="text-align: center;">
+    <td><%= Money.new(@subscription_plan.rate_cents.to_i, "INR")%>&nbsp; &#8377;</td></tr>
+
   <% @grouped_payments.each do |payments| %>
         <% payment = payments.first %>
         <%= content_tag :section, :class => :redirect do %>
@@ -20,6 +20,6 @@
               <%= render payments %>
             </div>
         <% end %>
-    <% end %></td></tr>
+    <% end %>
 </table>
 
