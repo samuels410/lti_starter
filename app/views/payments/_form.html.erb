@@ -1,13 +1,10 @@
 <%= form_for payment do |f| %>
-    <tr class="confirm_box_row" ><td >Email: <%= session['email']  %></td>
-      <td colspan="2">  Select Payment Mode <br/>
-        <br/><%= radio_button_tag 'payment[payment_method]', 'CREDIT', true ,style: "margin-top: 0px;"%> Credit Cards (MasterCard, VISA, Amex)
-        <br><%= radio_button_tag 'payment[payment_method]', 'DEBIT',style: "margin-top: 0px;" %> Debit Cards (MasterCard, VISA, Maestro)
-        <br><%= radio_button_tag 'payment[payment_method]', 'NET' ,style: "margin-top: 0px;"%> Net Banking (HDFC,Axis,SBI,Indus Ind,ICICI,KOTAK,YES Bank)
+    <div class="subscription_attr"> Email: <%= session['email']  %></div>
+    <div class="subscription_attr"> <%= radio_button_tag 'payment[payment_method]', 'CREDIT', true ,style: "margin-top: 0px;"%> Credit Cards (MasterCard, VISA, Amex)</div>
+    <div class="subscription_attr"><%= radio_button_tag 'payment[payment_method]', 'DEBIT',style: "margin-top: 0px;" %> Debit Cards (MasterCard, VISA, Maestro) </div>
+    <div class="subscription_attr"><%= radio_button_tag 'payment[payment_method]', 'NET' ,style: "margin-top: 0px;"%> Net Banking (HDFC,Axis,SBI,Indus Ind,ICICI,KOTAK,YES Bank) </div>
 
-      </td></tr>
 
-    <tr><td colspan="3" style="text-align: center;">
       <%= f.hidden_field :buyer_email_address ,:value => session['email'] %>
       <%= f.hidden_field :transaction_type,:value=> PZ_Config::TRANSACTION_TYPE%>
       <%= f.hidden_field :transaction_amount,:value=>  @subscription_plan.rate_cents.to_i %>
@@ -16,12 +13,12 @@
       <%= f.hidden_field :hash_method,:value=> PZ_Config::HASH_METHOD%>
   <%= f.hidden_field :subscription_plan_id,:value=> @subscription_plan.id %>
   <%= f.hidden_field :subscription_id,:value=> @subscription.id %>
-  <%= f.hidden_field :user_config_id,:value=> session["user_id"]%>
+  <%= f.hidden_field :user_config_id,:value=> session['user_config_id']%>
   <%= f.hidden_field :final_redirect_url,:value=> session['referrer']%>
 
-
-
-  <%= f.submit 'Confirm', :class=>"btn btn-primary" %>
-  <%= link_to 'Cancel' ,plans_path , :class=>"btn" %>
-    </td></tr>
+<div style="text-align: center;
+        padding: 10px;">
+  <%= f.submit 'Pay Now', :class=>"btn btn-primary btn-large" ,:style => "border-radius: 0px;"%>
+  <%= link_to 'Cancel' ,plans_path , :class=>"btn btn-large" ,:style => "border-radius: 0px;" %>
+</div>
 <% end %>

@@ -22,7 +22,7 @@ module ApplicationHelper
   def api_call(path, user_config, all_pages=false,method=nil,params=nil)
     #protocol = 'https'
     protocol = ENV['RACK_ENV'].to_s == "development" ? "http" : "https"
-    host = "#{protocol}://#{user_config.host}"
+    host = "#{protocol}://#{user_config.domain.host}"
     canvas = Canvas::API.new(:host => host, :token => user_config.access_token)
     begin
       if method == :post

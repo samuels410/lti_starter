@@ -8,7 +8,7 @@ LTISubscription::Application.routes.draw do
   resources :subscription_plans do
     get 'pre_index', on: :collection
     post 'pre_index', on: :collection
-    get 'subscribe', on: :member
+    post 'subscribe', on: :member
   end
 
   devise_for :users

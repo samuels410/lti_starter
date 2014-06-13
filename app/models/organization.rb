@@ -6,5 +6,6 @@ class Organization < ActiveRecord::Base
   has_many :feature_sets
   has_many :subscription_plans
   has_many :subscriptions
+  has_many :billing_types
 
 end

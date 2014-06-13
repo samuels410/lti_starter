@@ -13,6 +13,16 @@ class PaymentsController < ApplicationController
     @subscription = Subscription.find(params[:subscription_id])
     @subscription_plan = SubscriptionPlan.find(params[:subscription_plan_id])
     @grouped_payments = [[Payment.new]]
+    unless params[:billing].empty?
+      @selected_billing = BillingType.find(params[:billing])
+      unless @selected_billing.nil?
+        tmp_val = Money.new(@subscription_plan.rate_cents.to_i, "INR") * @selected_billing.discount_percentage
+        discount = (tmp_val/100) * @selected_billing.months
+        actual_amount = Money.new(@subscription_plan.rate_cents.to_i, "INR") * @selected_billing.months
+        @final_amount = actual_amount - discount
+      end
+    end
+
   end
 
 
@@ -79,7 +89,7 @@ class PaymentsController < ApplicationController
       else
         payment.subscription.paid_through = Date.today if payment.subscription.paid_through.nil?
         payment.subscription.update_attributes(subscription_plan_id: payment.subscription_plan_id)
-        update_lms_account(payment.subscription,payment.user_config_id,payment.user_config.domain_id)
+        update_lms_account(payment.subscription,payment.user_config)
         payment.completed = true
         payment.save!
         flash[:info] = "Payment Transaction Completed & Your Plan has been changed"

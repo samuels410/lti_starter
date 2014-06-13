@@ -49,6 +49,7 @@ class LtiController < ApplicationController
       email = session['email']
 
       session.destroy
+      session['user_config_id'] = user_config.id
       session['user_id'] = user_config.user_id.to_s
       session['domain_id'] = user_config.domain_id.to_s.to_i
       session["permission_for_#{launch_course_id}"] = permission
@@ -57,7 +58,7 @@ class LtiController < ApplicationController
 
       redirect_to plans_path
     else
-      return error("Error retrieving access token")
+      return render(:status => 400, :json => { :message => "Error retrieving access token" })
     end
   end
 

@@ -1,5 +1,6 @@
+<% unless session['no_header']  %>
 <div class="navbar">
-  <div class="navbar-inner" style="border-radius: 0px">
+  <div class="navbar-inner" style="border-radius: 0px;background: white;">
     <div class="container">
       <a class="brand" href="#">Arrivu LMS Subscription Plans </a>
       <% if user_signed_in?%>
@@ -27,3 +28,4 @@
     </div>
   </div>
 </div>
+<% end  %>

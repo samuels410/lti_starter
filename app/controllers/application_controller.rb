@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   require 'canvas-api'
 
   def validate_lti_launch
+    session['no_header'] = true
     get_org
     key = params['oauth_consumer_key']
     tool_config = ExternalConfig.find_by_config_type_and_value('lti',key)
@@ -60,6 +61,7 @@ class ApplicationController < ActionController::Base
         user_config.image = params['user_image']
         user_config.save
         session['user_id'] = user_config.user_id
+        session['user_config_id'] = user_config.id
         # otherwise we need to do the oauth dance for this user
       else
         oauth_dance(request, host)

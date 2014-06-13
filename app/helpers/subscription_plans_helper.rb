@@ -14,13 +14,12 @@ module SubscriptionPlansHelper
                            subscribable_id: session['account_id'],
                            subscribable_type: Subscription::SUBSCRIBABLE_TYPE_ACCOUNT)
       if @subscription.valid?
-        update_lms_account(@subscription)
+        update_lms_account(@subscription,UserConfig.find(session['user_config_id']))
       end
     end
   end
 
-  def update_lms_account(subscription,user_id,domain_id)
-    user_config = UserConfig.find_by_user_id_and_domain_id(user_id,domain_id)
+  def update_lms_account(subscription,user_config=nil)
     subscription_params = {:no_students => subscription.subscription_plan.feature_set.no_students ,
                            :no_teachers => subscription.subscription_plan.feature_set.no_teachers ,
                            :no_admins => subscription.subscription_plan.feature_set.no_admins,

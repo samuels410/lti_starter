@@ -7,7 +7,13 @@
                             'image' => 'https://lms.arrivuhiring.com/images/arrivu_logo.png',
                             'email' => 'lms.admin@arrivusystems.com'
     )
-  #   Feature sets
+  #   Billing types
+    @organization.billing_types.create(billing_type: "annually",discount_percentage: '20',months: 12)
+    @organization.billing_types.create(billing_type: "half-yearly",discount_percentage: '10',months: 6)
+    @organization.billing_types.create(billing_type: "quarterly",discount_percentage: '5',months: 3)
+    @organization.billing_types.create(billing_type: "month-by-month",discount_percentage: '0',months: 1)
+
+    #   Feature sets
    @f1= FeatureSet.create(organization_id: @organization.id,
                       name: "Free",
                       no_students: 100,

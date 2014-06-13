@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140604071341) do
+ActiveRecord::Schema.define(:version => 20140613102846) do
 
   create_table "account_transactions", :force => true do |t|
     t.integer  "subscription_id", :null => false
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(:version => 20140604071341) do
   end
 
   add_index "account_transactions", ["subscription_id"], :name => "index_account_transactions_on_subscription_id"
+
+  create_table "billing_types", :force => true do |t|
+    t.integer  "organization_id"
+    t.string   "billing_type"
+    t.decimal  "discount_percentage"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "months"
+  end
 
   create_table "domains", :force => true do |t|
     t.string   "host"
