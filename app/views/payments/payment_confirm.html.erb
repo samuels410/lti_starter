@@ -77,6 +77,7 @@
 
 
 <script type="text/javascript" charset="utf-8">
+  //Select billing type
     $('.payment_payment_method_BILLING').click(function(event){
         months = $(event.target).val();
         discount_percentage = $(event.target).data('percentage');
@@ -89,6 +90,14 @@
         });
 
     });
+    //Assign final amount to form hidden field to sent server
+    $('#pay_button').click(function(event){
+        amount =  $(".amount").text();
+        final_amount = amount * 100;
+        $("#payment_transaction_amount").val(final_amount);
+
+    });
+
 </script>
 
 

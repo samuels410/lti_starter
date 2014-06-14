@@ -1,8 +1,8 @@
 <%= form_for payment do |f| %>
     <div class="subscription_attr"> Email: <%= session['email']  %></div>
     <div class="subscription_attr"> <%= radio_button_tag 'payment[payment_method]', 'CREDIT', true ,style: "margin-top: 0px;"%> Credit Cards (MasterCard, VISA, Amex)</div>
-    <div class="subscription_attr"><%= radio_button_tag 'payment[payment_method]', 'DEBIT',style: "margin-top: 0px;" %> Debit Cards (MasterCard, VISA, Maestro) </div>
-    <div class="subscription_attr"><%= radio_button_tag 'payment[payment_method]', 'NET' ,style: "margin-top: 0px;"%> Net Banking (HDFC,Axis,SBI,Indus Ind,ICICI,KOTAK,YES Bank) </div>
+    <div class="subscription_attr"><%= radio_button_tag 'payment[payment_method]', 'DEBIT', true,style: "margin-top: 0px;" %> Debit Cards (MasterCard, VISA, Maestro) </div>
+    <div class="subscription_attr"><%= radio_button_tag 'payment[payment_method]', 'NET' , true,style: "margin-top: 0px;"%> Net Banking (HDFC,Axis,SBI,Indus Ind,ICICI,KOTAK,YES Bank) </div>
 
 
       <%= f.hidden_field :buyer_email_address ,:value => session['email'] %>
@@ -18,7 +18,7 @@
 
 <div style="text-align: center;
         padding: 10px;">
-  <%= f.submit 'Pay Now', :class=>"btn btn-primary btn-large" ,:style => "border-radius: 0px;"%>
+  <%= f.submit 'Pay Now', :class=>"btn btn-primary btn-large" ,:style => "border-radius: 0px;", :id => "pay_button" %>
   <%= link_to 'Cancel' ,plans_path , :class=>"btn btn-large" ,:style => "border-radius: 0px;" %>
 </div>
 <% end %>
