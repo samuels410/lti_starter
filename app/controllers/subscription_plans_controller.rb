@@ -15,7 +15,7 @@ class SubscriptionPlansController < ApplicationController
     if @subscription_plan.paid?
       redirect_to payment_confirm_path(@subscription,subscription_plan_id: @subscription_plan.id,billing: params[:subscription][:billing])
     else
-      @subscription.update_attributes!(subscription_plan_id: @subscription_plan.id)
+      @subscription.update_attributes!(subscription_plan_id: @subscription_plan.id,expire_on: nil)
       if @subscription.valid?
         update_lms_account(@subscription,UserConfig.find(session['user_config_id']))
         flash[:info] = "Your Plan has been changed"

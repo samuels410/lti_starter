@@ -2,11 +2,11 @@ class Payment < ActiveRecord::Base
 
   attr_accessible :subscription_plan_id,:subscription_id,:user_config_id,:merchant_transaction_id,
                   :buyer_email_address,:transaction_type,:transaction_amount,:payment_method,:currency,:ui_mode,
-                  :hash_method,:completed, :canceled,:final_redirect_url
+                  :hash_method,:completed, :canceled,:final_redirect_url,:bank_name,:billing_type_id
 
   validates_presence_of :subscription_plan_id,:subscription_id,:user_config_id,
                           :buyer_email_address,:transaction_type,:transaction_amount,:payment_method,:currency,:ui_mode,
-                          :hash_method,:final_redirect_url
+                          :hash_method,:final_redirect_url,:bank_name
   validates_uniqueness_of :merchant_transaction_id, uniqueness: true
 
   scope :completed,     where(completed: true)
@@ -14,6 +14,8 @@ class Payment < ActiveRecord::Base
   belongs_to :subscription
   belongs_to  :user_config
   belongs_to :subscription_plan
+  belongs_to :billing_type
+
 
   before_create :generate_merchant_transaction_id
 

@@ -1,8 +1,31 @@
 <div class="subscription_top">
   <br/>
  <div style="margin-left: 20px">
-  You Have a <%= @subscription.subscription_plan.name %> subscription. <br/>
-  According to plan you have to pay monthly <%= Money.new(@subscription.subscription_plan.rate_cents.to_i, "INR")  %> &#8377;.
+  You Have a <%= @subscription.subscription_plan.name %> subscription.
+   <% if @subscription.expire_on &&  @subscription.paid_through%>
+     It will expire on <b> <%= @subscription.expire_on %> </b>.
+      <% unless @subscription.expired?  %>
+       You have <%= @subscription.usage %> days usage.
+       <% end  %>
+   <% end  %>
+       <br/>
+  According to plan you have to pay monthly <%= Money.new(@subscription.subscription_plan.rate_cents.to_i, "INR")  %> &#8377;.<br/>
+
+   <% if @subscription.paid? && @subscription.in_grace?  %>
+       Your subscription is in Grace period.Pay your monthly bill now. Once our grace is expired your subscription
+       will changed to free plan.
+   <% end  %>
+  <% if @subscription.expired?  %>
+   <div class="alert-error" style="width: 37%;
+           padding: 5px;">
+   Your subscription is expired so it will be automatically changed to free plan.
+   </div>
+       <br/>
+ <% end  %>
+
+
+
+
  </div>
 </div>
 <div id="plans">
@@ -34,9 +57,15 @@
             <%= form_for :subscription, :html => {:class => "change_plan_form"}, :url => subscribe_subscription_plan_path(plan,subscription_id: @subscription.id) do |f| %>
              <%= f.hidden_field :billing ,:value => "",:class => "billing_type"%>
             <% if @subscription.subscription_plan_id ==  plan.id %>
+                <%@found= true  %>
               <%= f.submit  "Pay Now"%>
              <% else  %>
-              <%= f.submit  "Upgrade Now"%>
+                 <% if @found  %>
+                        <%= f.submit  "Upgrade Now"%>
+                 <% else  %>
+                        <%= f.submit  "Degrade"%>
+                 <% end %>
+
             <% end%>
             <% end %>
           </div>
