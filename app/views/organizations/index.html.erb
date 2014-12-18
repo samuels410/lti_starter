@@ -1,3 +1,6 @@
+<a id="create_organization" href="#" class="btn btn-success">Create Organization</a>
+<br/>
+<br/>
 <%= render :partial => 'form' %>
 <table class="table">
   <tr>
@@ -13,8 +16,9 @@
   <% @organizations.each_with_index do |organization,idx| %>
       <tr>
         <td><%= idx +1 %></td>
-        <td><%= organization.name%></td>
         <td><%= organization.host%></td>
+        <td><%= organization.name%></td>
+        <td><%= organization.url%></td>
         <td><%= organization.image%></td>
         <td><%= organization.email%></td>
         <td><%= link_to "Edit", edit_organization_path(organization) %></td>
@@ -24,3 +28,14 @@
 
   <% end  %>
 </table>
+<script type="text/javascript" charset="utf-8">
+    $( document ).ready(function() {
+        <% unless @organization.errors.present?  %>
+            $("#new_organization").hide();
+        <% end  %>
+        $( "#create_organization" ).click(function() {
+            $("#new_organization").slideToggle();
+        });
+
+    });
+</script>

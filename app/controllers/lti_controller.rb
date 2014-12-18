@@ -3,7 +3,7 @@ class LtiController < ApplicationController
   before_filter :validate_lti_launch, except: [:oauth_success]
 
   def placement_launch
-    redirect_to plans_path(organization_id: @org.id)
+    redirect_to root_path
   end
 
   def session_fixed
@@ -56,7 +56,7 @@ class LtiController < ApplicationController
       session['name'] = name
       session['email'] = email
 
-      redirect_to plans_path
+      redirect_to root_path
     else
       return render(:status => 400, :json => { :message => "Error retrieving access token" })
     end
