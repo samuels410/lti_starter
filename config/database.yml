@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: subscription
+  database: corporate
   host: localhost
   username: arrivu
   password: arrivu
@@ -10,7 +10,7 @@ development:
 production:
   adapter: postgresql
   encoding: utf8
-  database: subscription
+  database: corporate
   host: localhost
   username: arrivu
   password: arrivu
