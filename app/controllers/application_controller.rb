@@ -80,7 +80,8 @@ class ApplicationController < ActionController::Base
         oauth_dance(request, host)
       end
     else
-      return error("Invalid tool launch - invalid parameters")
+      redirect_to root_path
+       flash[:error] = "Invalid lti request"
     end
   end
 

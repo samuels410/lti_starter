@@ -20,7 +20,9 @@
       <lticm:property name="enabled">true</lticm:property>
     </lticm:options>
     <lticm:options name="user_navigation">
-      <lticm:property name="url">http://localhost:4000/placement_launch/?my_courses=1</lticm:property>
+      <lticm:property name="url">
+        http://localhost:4000/placement_launch?my_courses=1
+      </lticm:property>
       <lticm:property name="text">My Courses</lticm:property>
       <lticm:property name="enabled">true</lticm:property>
     </lticm:options>
