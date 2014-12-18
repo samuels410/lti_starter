@@ -58,7 +58,7 @@ class LtiController < ApplicationController
 
       redirect_to root_path
     else
-      return render(:status => 400, :json => { :message => "Error retrieving access token" })
+      render(:status => 400, :json => { :message => "Error retrieving access token" })
     end
   end
 
