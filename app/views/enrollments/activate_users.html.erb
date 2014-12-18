@@ -1,0 +1,27 @@
+<h3> Student Enrollments</h3>
+<table class="table table-bordered">
+  <thead>
+    <th>Serial no</th>
+    <th>Name</th>
+    <th>Login id</th>
+    <th>Enrollment state</th>
+    <th>Enrolled at</th>
+
+  </thead>
+  <% @enrollments.each_with_index do |enrollment,idx| %>
+      <tr>
+        <% if  params[:page].to_i == 1 %>
+            <td><%= idx +1 %></td>
+        <% else  %>
+            <td><%= (idx + params[:page].to_i) + 1 %></td>
+         <% end  %>
+        <td><%= enrollment['user']['name'] %> </td>
+        <td><%= enrollment['user']['login_id'] %> </td>
+        <td><%= enrollment['enrollment_state'] %> </td>
+        <td><%= enrollment['created_at'].to_date.strftime('%d-%b-%Y') %></td>
+      </tr>
+  <% end  %>
+</table>
+<% if @enrollments.more? %>
+    <a href="<%= activate_users_enrollments_path(:page => params[:page].to_i + 1) %>" class="btn ">Next page</a>
+<% end  %>

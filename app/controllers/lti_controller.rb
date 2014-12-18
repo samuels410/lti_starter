@@ -3,7 +3,12 @@ class LtiController < ApplicationController
   before_filter :validate_lti_launch, except: [:oauth_success]
 
   def placement_launch
-    redirect_to root_path
+    if params['my_courses'].to_i == 1
+      redirect_to root_path
+    else
+      redirect_to activate_users_enrollments_path
+    end
+
   end
 
   def session_fixed
