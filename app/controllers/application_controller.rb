@@ -7,6 +7,19 @@ class ApplicationController < ActionController::Base
   require 'oauth/request_proxy/rack_request'
   require 'canvas-api'
 
+  def after_sign_in_path_for(resource)
+    clear_session_and_redirect(resource)
+  end
+
+  def after_sign_up_path_for(resource)
+    clear_session_and_redirect(resource)
+  end
+
+  def clear_session_and_redirect(resource)
+    session.delete(:no_header)
+    request.env['omniauth.origin'] || stored_location_for(resource) || root_path
+  end
+
   def validate_lti_launch
     session['no_header'] = true
     get_org

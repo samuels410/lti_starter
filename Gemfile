@@ -9,7 +9,6 @@ group :assets do
 end
 
 gem 'jquery-rails','3.1.0'
-gem 'freemium' ,git: "git://github.com/samuels410/freemium"
 gem 'devise','3.2.4'
 gem "rolify",'3.4.0'
 gem "cancan",'1.6.10'
@@ -17,4 +16,4 @@ gem "ims-lti",'1.1.4'
 gem "canvas-api",'1.1.1'
 gem "oauth",'0.4.7'
 gem 'pg','0.17.1'
-gem 'paypal-express'
+gem 'will_paginate', '~> 3.0.6'

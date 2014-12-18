@@ -13,7 +13,7 @@
         <td><%= idx +1 %></td>
         <td><%= user_config.name%></td>
         <td><%= user_config.access_token%></td>
-        <td><%= image_tag user_config.image ,:size => '150x50'%></td>
+        <td><%= image_tag user_config.image ,:size => '50x50'%></td>
         <td><%= user_config.global_user_id%></td>
         <td><%= user_config.user_id%></td>
         <td><%= user_config.domain_id%></td>
@@ -21,3 +21,5 @@
 
   <% end  %>
 </table>
+
+<%= will_paginate @user_configs %>
