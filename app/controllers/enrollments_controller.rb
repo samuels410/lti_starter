@@ -3,7 +3,7 @@ class EnrollmentsController < ApplicationController
 before_filter :check_for_session
 
 def check_for_session
-  @per_page ||= 2
+  @per_page ||= 100
 
   if !session['domain_id'] || !session['user_id'] || !session['source_id']
     render 'session_lost'
