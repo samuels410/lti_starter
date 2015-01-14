@@ -4,7 +4,7 @@ Role.create([
             ], :without_protection => true)
 puts 'SETTING UP DEFAULT USER LOGIN'
 
-user = User.create! :name => 'Administrator', :email => 'lms.admin@arrivusystems.com', :password => 'admin123$', :password_confirmation => 'admin123$'
+user = User.create! :name => 'Administrator', :email => 'devops@arrivusystems.com', :password => 'admin123$', :password_confirmation => 'admin123$'
 
 puts 'User created: ' << user.name
 
