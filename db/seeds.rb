@@ -1,7 +1,7 @@
 puts 'Creating deafult user'
 Role.create([
                 { :name => 'admin' },
-            ], :without_protection => true)
+            ])
 puts 'SETTING UP DEFAULT USER LOGIN'
 
 user = User.create! :name => 'Administrator', :email => 'devops@arrivusystems.com', :password => 'admin123$', :password_confirmation => 'admin123$'

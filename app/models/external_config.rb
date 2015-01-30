@@ -1,5 +1,5 @@
 class ExternalConfig < ActiveRecord::Base
-   attr_accessible :config_type, :app_name,:shared_secret,:value
+
    validates :config_type,:app_name ,:shared_secret,:value , presence: true
 
    belongs_to :organization

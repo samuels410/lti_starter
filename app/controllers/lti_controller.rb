@@ -1,5 +1,5 @@
 class LtiController < ApplicationController
-
+  skip_before_filter :verify_authenticity_token
   before_filter :validate_lti_launch, except: [:oauth_success]
 
   def placement_launch

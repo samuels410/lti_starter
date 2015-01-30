@@ -7,8 +7,8 @@ class ExternalConfigsController < ApplicationController
   end
 
   def create
-    @external_config = ExternalConfig.new(params[:external_config])
-    if params[:external_config][:config_type] == 'lti'
+    @external_config = ExternalConfig.new(permitted_params)
+    if permitted_params[:config_type] == 'lti'
       generate_lti_keys(@external_config)
     end
     if @external_config.save
@@ -26,7 +26,7 @@ class ExternalConfigsController < ApplicationController
 
   def update
     @external_config = ExternalConfig.find(params[:id])
-    if @external_config.update_attributes(params[:external_config])
+    if @external_config.update_attributes(permitted_params)
       flash[:notice] = "Successfully updated ExternalConfig."
       redirect_to external_configs_path
     else
@@ -45,6 +45,12 @@ class ExternalConfigsController < ApplicationController
     conf.value = Digest::MD5.hexdigest(Time.now.to_i.to_s + rand.to_s).to_s
     conf.shared_secret = Digest::MD5.hexdigest(Time.now.to_i.to_s + rand.to_s + conf.value)
     conf
+  end
+
+  private
+
+  def permitted_params
+    params.require(:external_config).permit(:config_type, :app_name,:shared_secret,:value)
   end
 
 end

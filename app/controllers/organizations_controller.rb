@@ -7,7 +7,7 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-    @organization = Organization.new(params[:organization])
+    @organization = Organization.new(permitted_params)
     if @organization.save
       flash[:notice] = "Successfully created Organization."
         redirect_to organizations_path
@@ -23,7 +23,7 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization = Organization.find(params[:id])
-    if @organization.update_attributes(params[:organization])
+    if @organization.update_attributes(permitted_params)
       flash[:notice] = "Successfully updated Organization."
       redirect_to organizations_path
     else
@@ -36,6 +36,12 @@ class OrganizationsController < ApplicationController
     @organization.destroy
     flash[:notice] = "Successfully destroyed Organization."
     redirect_to organizations_path
+  end
+
+  private
+
+  def permitted_params
+    params.require(:organization).permit(:host, :name,:url,:image,:email)
   end
 
 end

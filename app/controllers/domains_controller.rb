@@ -7,7 +7,7 @@ class DomainsController < ApplicationController
   end
 
   def create
-    @domain = Domain.new(params[:domain])
+    @domain = Domain.new(permitted_params)
     if @domain.save
       flash[:notice] = "Successfully created Domain."
       redirect_to domains_path
@@ -23,7 +23,7 @@ class DomainsController < ApplicationController
 
   def update
     @domain = Domain.find(params[:id])
-    if @domain.update_attributes(params[:domain])
+    if @domain.update_attributes(permitted_params)
       flash[:notice] = "Successfully updated Domain."
       redirect_to domains_path
     else
@@ -38,4 +38,9 @@ class DomainsController < ApplicationController
     redirect_to domains_path
   end
 
+  private
+
+  def permitted_params
+    params.require(:domain).permit(:host, :name)
+  end
 end

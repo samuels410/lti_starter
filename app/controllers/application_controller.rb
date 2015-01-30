@@ -2,10 +2,17 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
+  skip_before_filter :verify_authenticity_token, only: [:validate_lti_launch]
   include ApplicationHelper
   require 'oauth'
   require 'oauth/request_proxy/rack_request'
   require 'canvas-api'
+
+  before_filter :allow_iframe_requests
+
+  def allow_iframe_requests
+    response.headers.delete('X-Frame-Options')
+  end
 
   def after_sign_in_path_for(resource)
     clear_session_and_redirect(resource)
@@ -26,7 +33,8 @@ class ApplicationController < ActionController::Base
     key = params['oauth_consumer_key']
     tool_config = ExternalConfig.find_by_config_type_and_value('lti',key)
     if !tool_config
-      return render(:status => 400, :json => { :message => "Invalid tool launch - unknown tool consumer" })
+      render_error_message("Invalid tool launch - unknown tool consumer")
+      return
     end
     secret = tool_config.shared_secret
     host = params['custom_canvas_api_domain']
@@ -34,15 +42,17 @@ class ApplicationController < ActionController::Base
       host = params['launch_presentation_return_url'].split(/\//)[2]
     end
     host ||= params['tool_consumer_instance_guid'].split(/\./)[1..-1].join(".") if params['tool_consumer_instance_guid'] && params['tool_consumer_instance_guid'].match(/\./)
-    domain = Domain.find_or_create_by_host(host)
+    domain = Domain.find_or_create_by(host: host)
     domain.name = params['tool_consumer_instance_name']
     domain.save
     provider = IMS::LTI::ToolProvider.new(key, secret, params)
     if !params['custom_canvas_user_id']
-      return render(:status => 400, :json => { :message => "This app appears to have been misconfigured, please contact your instructor or administrator. App must be launched with public permission settings." })
+      render_error_message("This app appears to have been misconfigured, please contact your instructor or administrator. App must be launched with public permission settings.")
+      return
     end
     if !params['lis_person_contact_email_primary']
-      return render(:status => 400, :json => { :message => "This app appears to have been misconfigured, please contact your instructor or administrator. Email address is required on user launches." })
+      render_error_message("This app appears to have been misconfigured, please contact your instructor or administrator. Email address is required on user launches.")
+      return
     end
     if provider.valid_request?(request)
 
@@ -120,6 +130,9 @@ class ApplicationController < ActionController::Base
     oauth_config
   end
 
+  def render_error_message(msg)
+    render partial: "shared/error_message" , locals: {msg: msg}
+  end
 
 
 end
